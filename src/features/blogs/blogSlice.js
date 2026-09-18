@@ -131,7 +131,7 @@ export default blogSlice.reducer;
 export const FetchBlogs = createAsyncThunk("FETCH_BLOGS", async () => {
   try {
     const response = await axios.get("/api/blogs");
-    return response.data;
+    return response.data.reverse();
   } catch (error) {
     console.log(error);
   }
