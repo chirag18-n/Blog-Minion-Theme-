@@ -132,9 +132,7 @@ export const FetchBlogs = createAsyncThunk(
   "FETCH_BLOGS",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(
-        "https://blog-api-74l6.onrender.com/api/blogs",
-      );
+      const response = await axios.get("/api/blogs");
 
       return Array.isArray(response.data) ? response.data.reverse() : [];
     } catch (error) {
