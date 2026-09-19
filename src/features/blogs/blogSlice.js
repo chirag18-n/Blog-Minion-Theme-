@@ -140,7 +140,9 @@ export const FetchBlogs = createAsyncThunk("FETCH_BLOGS", async () => {
 // Fetch Blog
 export const FetchBlog = createAsyncThunk("FETCH_BLOG", async (_id) => {
   try {
-    const response = await axios.get("/api/blogs/" + _id);
+    const response = await axios.get(
+      "https://blog-api-74l6.onrender.com//api/blogs/" + _id,
+    );
     return response.data;
   } catch (error) {
     console.log(error);
