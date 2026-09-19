@@ -9,11 +9,23 @@ import { FetchBlogs } from '../features/blogs/blogSlice';
 export default function Feed() {
   const dispatch=useDispatch()
 
-  const {blogs , isLoading, isError, message} = useSelector(state=>state.blog)
+  /*
+  const {blogs  , isLoading, isError, message} = useSelector(state=>state.blog)
 
     useEffect(() => {
     dispatch(FetchBlogs())
-  }, [dispatch])
+  }, [dispatch])*/
+
+  const {
+    blogs = [],
+    isLoading,
+    isError,
+    message
+  } = useSelector((state) => state.blog);
+  
+  useEffect(() => {
+    dispatch(FetchBlogs());
+  }, [dispatch]);
   
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col gap-6">

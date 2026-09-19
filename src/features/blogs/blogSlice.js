@@ -126,7 +126,7 @@ const blogSlice = createSlice({
 export const {} = blogSlice.actions;
 
 export default blogSlice.reducer;
-
+/*
 //Fetch all blogs
 export const FetchBlogs = createAsyncThunk(
   "FETCH_BLOGS",
@@ -138,6 +138,23 @@ export const FetchBlogs = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Failed to fetch blogs",
+      );
+    }
+  },
+);*/
+
+export const FetchBlogs = createAsyncThunk(
+  "FETCH_BLOGS",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get("/api/blogs");
+
+      return Array.isArray(response.data) ? response.data.reverse() : [];
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.msg ||
+          error.response?.data?.message ||
+          "Failed to fetch blogs",
       );
     }
   },
