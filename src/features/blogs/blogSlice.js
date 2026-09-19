@@ -127,22 +127,28 @@ export const {} = blogSlice.actions;
 
 export default blogSlice.reducer;
 
-// Fetch all blogs
-export const FetchBlogs = createAsyncThunk("FETCH_BLOGS", async () => {
-  try {
-    const response = await axios.get("/api/blogs");
-    return response.data.reverse();
-  } catch (error) {
-    console.log(error);
-  }
-});
+//Fetch all blogs
+export const FetchBlogs = createAsyncThunk(
+  "FETCH_BLOGS",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        "https://blog-api-74l6.onrender.com/api/blogs",
+      );
+
+      return Array.isArray(response.data) ? response.data.reverse() : [];
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Failed to fetch blogs",
+      );
+    }
+  },
+);
 
 // Fetch Blog
 export const FetchBlog = createAsyncThunk("FETCH_BLOG", async (_id) => {
   try {
-    const response = await axios.get(
-      "https://blog-api-74l6.onrender.com//api/blogs/" + _id,
-    );
+    const response = await axios.get("/api/blogs/" + _id);
     return response.data;
   } catch (error) {
     console.log(error);
